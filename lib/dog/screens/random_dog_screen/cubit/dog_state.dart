@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
 
+import 'package:random_dog/dog/domain/dog.dart';
+
 @immutable
 abstract class DogState {}
 
-class UserInitial extends DogState {}
+class DogInitial extends DogState {}
 
-class UserLoading extends DogState {}
+class DogLoading extends DogState {}
 
-class UserSuccess extends DogState {}
+class DogSuccess extends DogState {
+  final Dog? dog;
+  DogSuccess({
+    this.dog,
+  });
+}
 
-class UserError extends DogState {}
+class DogError extends DogState {}
