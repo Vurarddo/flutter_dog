@@ -11,7 +11,7 @@ const _kPadding = 15.0;
 const _randomDogTitle = 'Random Dog';
 const _helloDogText = 'Hello Dog!!!';
 const _getRandomDogText = 'Get random dog';
-const _errorText = 'No internet';
+const _errorText = 'Something was wrong';
 
 class RandomDogScreen extends StatefulWidget {
   static const _routeName = '/random-dog-screen';
@@ -38,7 +38,6 @@ class _RandomDogScreenState extends State<RandomDogScreen> {
   Dog? randomDog;
 
   DogCubit get dogCubit => BlocProvider.of<DogCubit>(context);
-  // DogService get dogService => GetIt.instance.get<DogService>();
 
   @override
   Widget build(BuildContext context) {
@@ -46,13 +45,12 @@ class _RandomDogScreenState extends State<RandomDogScreen> {
       appBar: AppBar(
         title: const Text(_randomDogTitle),
       ),
-      body: BlocConsumer<DogCubit, DogState>(
-        listener: (context, state) {
+      body: BlocBuilder<DogCubit, DogState>(
+        builder: (context, state) {
           if (state is DogSuccess) {
             randomDog = state.dog;
           }
-        },
-        builder: (context, state) {
+
           Widget child = Text(
             _helloDogText,
             style: context.theme.textTheme.headline4,
@@ -85,18 +83,11 @@ class _RandomDogScreenState extends State<RandomDogScreen> {
         padding: const EdgeInsets.all(_kPadding),
         child: ElevatedButton(
           onPressed: () {
-            dogCubit.getDogImage();
-            // await _getRandomDog();
-            // setState(() {});
+            dogCubit.getRandomDog();
           },
           child: Text(_getRandomDogText.toUpperCase()),
         ),
       ),
     );
   }
-
-  // Future<Dog?> _getRandomDog() async {
-  //   randomDog = await dogService.getRandomDog();
-  //   return randomDog;
-  // }
 }

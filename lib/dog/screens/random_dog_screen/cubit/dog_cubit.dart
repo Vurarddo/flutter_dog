@@ -8,11 +8,11 @@ class DogCubit extends Cubit<DogState> {
   DogCubit() : super(DogInitial());
   DogService get dogService => GetIt.instance.get<DogService>();
 
-  void getDogImage() async {
+  void getRandomDog() async {
     emit(DogLoading());
 
     try {
-      Dog? randomDog = await dogService.getRandomDog();
+      final Dog? randomDog = await dogService.getRandomDog();
       emit(DogSuccess(dog: randomDog));
     } catch (e) {
       emit(DogError());
