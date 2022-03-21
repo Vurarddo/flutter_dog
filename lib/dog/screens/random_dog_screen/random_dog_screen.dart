@@ -56,7 +56,13 @@ class _RandomDogScreenState extends State<RandomDogScreen> {
             style: context.theme.textTheme.headline4,
           );
           if (randomDog != null) {
-            child = Image.network(randomDog!.imageUrl);
+            child = ListView.builder(
+              itemCount: randomDog!.imagesUrl.length,
+              itemBuilder: (BuildContext context, int index) {
+                final imageUrl = randomDog!.imagesUrl[index];
+                return Image.network(imageUrl);
+              },
+            );
           }
 
           if (state is DogLoading) {

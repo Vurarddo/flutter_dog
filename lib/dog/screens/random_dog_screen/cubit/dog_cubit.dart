@@ -13,6 +13,7 @@ class DogCubit extends Cubit<DogState> {
 
     try {
       final Dog? randomDog = await dogService.getRandomDog();
+
       emit(DogSuccess(dog: randomDog));
     } catch (e) {
       emit(DogError());

@@ -4,11 +4,11 @@ part 'dog.repository.dart';
 
 class Dog extends Equatable {
   const Dog({
-    required this.imageUrl,
+    required this.imagesUrl,
   });
 
-  final String imageUrl;
+  final List<String> imagesUrl;
 
   @override
-  List<Object?> get props => [imageUrl];
+  List<Object?> get props => [imagesUrl];
 }

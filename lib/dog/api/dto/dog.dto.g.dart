@@ -7,5 +7,6 @@ part of 'dog.dto.dart';
 // **************************************************************************
 
 DogDTO _$DogDTOFromJson(Map<String, dynamic> json) => DogDTO(
-      imageUrl: json['message'] as String,
+      imagesUrl:
+          (json['message'] as List<dynamic>).map((e) => e as String).toList(),
     );

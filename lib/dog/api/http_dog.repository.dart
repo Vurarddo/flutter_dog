@@ -14,7 +14,7 @@ class HttpDogRepository implements DogRepository {
   @override
   Future<Dog> getRandomDog() async {
     try {
-      final response = await _dio.get(DogApiClient.randomDog);
+      final response = await _dio.get(DogApiClient.randomDogs);
       final dogDTO = DogDTO.fromJson(response.data);
 
       return dogDTO.toDog();

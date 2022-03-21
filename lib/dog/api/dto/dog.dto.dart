@@ -7,15 +7,15 @@ part 'dog.dto.g.dart';
 @JsonSerializable(createToJson: false)
 class DogDTO {
   DogDTO({
-    required this.imageUrl,
+    required this.imagesUrl,
   });
 
   @JsonKey(name: 'message')
-  final String imageUrl;
+  final List<String> imagesUrl;
 
   factory DogDTO.fromJson(Map<String, dynamic> json) => _$DogDTOFromJson(json);
 
   Dog toDog() {
-    return Dog(imageUrl: imageUrl);
+    return Dog(imagesUrl: imagesUrl);
   }
 }
