@@ -7,15 +7,32 @@ part 'dog.dto.g.dart';
 @JsonSerializable(createToJson: false)
 class DogDTO {
   DogDTO({
+    required this.imageUrl,
+  });
+
+  @JsonKey(name: 'message')
+  final String imageUrl;
+
+  factory DogDTO.fromJson(Map<String, dynamic> json) => _$DogDTOFromJson(json);
+
+  Dog toDog() {
+    return Dog(imageUrl: imageUrl);
+  }
+}
+
+@JsonSerializable(createToJson: false)
+class DogsDTO {
+  DogsDTO({
     required this.imagesUrl,
   });
 
   @JsonKey(name: 'message')
   final List<String> imagesUrl;
 
-  factory DogDTO.fromJson(Map<String, dynamic> json) => _$DogDTOFromJson(json);
+  factory DogsDTO.fromJson(Map<String, dynamic> json) =>
+      _$DogsDTOFromJson(json);
 
-  Dog toDog() {
-    return Dog(imagesUrl: imagesUrl);
+  Dogs toDog() {
+    return Dogs(imagesUrl: imagesUrl);
   }
 }

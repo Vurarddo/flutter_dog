@@ -11,8 +11,10 @@ class DogLoading extends DogState {}
 
 class DogSuccess extends DogState {
   final Dog? dog;
+  final Dogs? dogs;
   DogSuccess({
     this.dog,
+    this.dogs,
   });
 }
 

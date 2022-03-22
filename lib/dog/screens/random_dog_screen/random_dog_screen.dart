@@ -11,6 +11,8 @@ const _kPadding = 15.0;
 const _randomDogTitle = 'Random Dog';
 const _helloDogText = 'Hello Dog!!!';
 const _getRandomDogText = 'Get random dog';
+const _getRandomDogsText = 'Get random dogs';
+const _getRandomDogsTexts = 'Get 15 random dogs';
 const _errorText = 'Something was wrong';
 
 class RandomDogScreen extends StatefulWidget {
@@ -36,6 +38,7 @@ class RandomDogScreen extends StatefulWidget {
 
 class _RandomDogScreenState extends State<RandomDogScreen> {
   Dog? randomDog;
+  Dogs? randomDogs;
 
   DogCubit get dogCubit => BlocProvider.of<DogCubit>(context);
 
@@ -48,6 +51,7 @@ class _RandomDogScreenState extends State<RandomDogScreen> {
       body: BlocBuilder<DogCubit, DogState>(
         builder: (context, state) {
           if (state is DogSuccess) {
+            randomDogs = state.dogs;
             randomDog = state.dog;
           }
 
@@ -55,14 +59,17 @@ class _RandomDogScreenState extends State<RandomDogScreen> {
             _helloDogText,
             style: context.theme.textTheme.headline4,
           );
-          if (randomDog != null) {
+          if (randomDogs != null) {
             child = ListView.builder(
-              itemCount: randomDog!.imagesUrl.length,
+              itemCount: randomDogs!.imagesUrl.length,
               itemBuilder: (BuildContext context, int index) {
-                final imageUrl = randomDog!.imagesUrl[index];
+                final imageUrl = randomDogs!.imagesUrl[index];
                 return Image.network(imageUrl);
               },
             );
+          }
+          if (randomDog != null) {
+            child = Image.network(randomDog!.imageUrl);
           }
 
           if (state is DogLoading) {
@@ -87,11 +94,30 @@ class _RandomDogScreenState extends State<RandomDogScreen> {
       ),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(_kPadding),
-        child: ElevatedButton(
-          onPressed: () {
-            dogCubit.getRandomDog();
-          },
-          child: Text(_getRandomDogText.toUpperCase()),
+        child: Expanded(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  dogCubit.getRandomDog();
+                },
+                child: Text(_getRandomDogText.toUpperCase()),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  dogCubit.getRandomDogs();
+                },
+                child: Text(_getRandomDogsText.toUpperCase()),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  dogCubit.getGivenNumberDogs(15);
+                },
+                child: Text(_getRandomDogsTexts.toUpperCase()),
+              ),
+            ],
+          ),
         ),
       ),
     );
