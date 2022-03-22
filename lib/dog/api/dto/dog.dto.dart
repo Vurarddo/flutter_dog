@@ -32,7 +32,7 @@ class DogsDTO {
   factory DogsDTO.fromJson(Map<String, dynamic> json) =>
       _$DogsDTOFromJson(json);
 
-  Dogs toDog() {
-    return Dogs(imagesUrl: imagesUrl);
+  List<Dog> toDogs() {
+    return imagesUrl.map((imageUrl) => Dog(imageUrl: imageUrl)).toList();
   }
 }

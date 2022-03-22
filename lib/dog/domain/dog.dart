@@ -12,14 +12,3 @@ class Dog extends Equatable {
   @override
   List<Object?> get props => [imageUrl];
 }
-
-class Dogs extends Equatable {
-  const Dogs({
-    required this.imagesUrl,
-  });
-
-  final List<String> imagesUrl;
-
-  @override
-  List<Object?> get props => [imagesUrl];
-}

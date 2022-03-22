@@ -24,25 +24,13 @@ class HttpDogRepository implements DogRepository {
   }
 
   @override
-  Future<Dogs> getRandomDogs() async {
+  Future<List<Dog>> getGivenNumberDogs(int number) async {
     try {
-      final response = await _dio.get(DogApiClient.randomDogs);
-      final dogsDTO = DogsDTO.fromJson(response.data);
-
-      return dogsDTO.toDog();
-    } on DioError catch (_) {
-      rethrow;
-    }
-  }
-
-  @override
-  Future<Dogs> getGivenNumberDogs(int number) async {
-    try {
-      final response = await _dio.get(DogApiClient.randomDog + '/$number');
+      final response = await _dio.get(DogApiClient.randomDogs(number));
 
       final dogsDTO = DogsDTO.fromJson(response.data);
 
-      return dogsDTO.toDog();
+      return dogsDTO.toDogs();
     } on DioError catch (_) {
       rethrow;
     }

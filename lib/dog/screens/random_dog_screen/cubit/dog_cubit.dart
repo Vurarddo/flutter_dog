@@ -19,22 +19,12 @@ class DogCubit extends Cubit<DogState> {
     }
   }
 
-  void getRandomDogs() async {
-    emit(DogLoading());
-
-    try {
-      final Dogs? randomDogs = await dogService.getRandomDogs();
-      emit(DogSuccess(dogs: randomDogs));
-    } catch (e) {
-      emit(DogError());
-    }
-  }
-
   void getGivenNumberDogs(int number) async {
     emit(DogLoading());
 
     try {
-      final Dogs? randomDogs = await dogService.getGivenNumberDogs(15);
+      final List<Dog?>? randomDogs =
+          await dogService.getGivenNumberDogs(number);
       emit(DogSuccess(dogs: randomDogs));
     } catch (e) {
       emit(DogError());
