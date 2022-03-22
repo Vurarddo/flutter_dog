@@ -19,3 +19,20 @@ class DogDTO {
     return Dog(imageUrl: imageUrl);
   }
 }
+
+@JsonSerializable(createToJson: false)
+class DogsDTO {
+  DogsDTO({
+    required this.imagesUrl,
+  });
+
+  @JsonKey(name: 'message')
+  final List<String> imagesUrl;
+
+  factory DogsDTO.fromJson(Map<String, dynamic> json) =>
+      _$DogsDTOFromJson(json);
+
+  List<Dog> toDogs() {
+    return imagesUrl.map((imageUrl) => Dog(imageUrl: imageUrl)).toList();
+  }
+}
